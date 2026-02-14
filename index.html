@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hamza Shahid – Full Stack AI Engineer</title>
+  <!-- SEO meta -->
+  <meta name="description" content="Hamza Shahid – Full Stack AI Engineer building intelligent web systems, AI SaaS, and modern web applications. Located in Faisalabad, Pakistan.">
+  <meta name="keywords" content="Full Stack AI Engineer, React, Node.js, Python, LLM, AI Automation, MERN, Next.js, Pakistan">
+  <meta name="author" content="Hamza Shahid">
+  <!-- Open Graph (LinkedIn / social cards) -->
+  <meta property="og:title" content="Hamza Shahid – Full Stack AI Engineer">
+  <meta property="og:description" content="AI‑driven full stack developer. Explore intelligent projects and modern web systems.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hamzashahid.vercel.app">
+  <meta property="og:image" content="https://hamzashahid.vercel.app/og-image.jpg"> <!-- placeholder, optional -->
+  <!-- favicon (GitHub favicon) -->
+  <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg" type="image/svg+xml">
+  <!-- fonts & smooth base -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+  <style>
+    /* ----- RESET & VARIABLES (dark futuristic theme) ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #0b0d12;
+      color: #e9edf0;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    :root {
+      --primary: #5f6cff;
+      --primary-glow: rgba(95, 108, 255, 0.4);
+      --accent-cyan: #4ad9e6;
+      --bg-deep: #0a0c12;
+      --bg-card: #151a24;
+      --bg-card-hover: #1e2632;
+      --border-glow: #2d3645;
+      --text-dim: #a6b3cf;
+      --text-bright: #ffffff;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    /* ----- smooth reveal (intersection observer fallback) ----- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* ----- container & utility ----- */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    section {
+      padding: 5rem 0;
+      border-bottom: 1px solid rgba(90, 108, 255, 0.1);
+    }
+    /* ----- buttons with hover animations ----- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      border: 1.5px solid rgba(95, 108, 255, 0.5);
+      color: #fff;
+      padding: 0.7rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+    }
+    .btn:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      box-shadow: 0 0 20px var(--primary-glow);
+      transform: translateY(-3px) scale(1.02);
+    }
+    .btn-outline-light {
+      border-color: rgba(255,255,255,0.2);
+    }
+    .btn-outline-light:hover {
+      background: rgba(95, 108, 255, 0.9);
+      border-color: var(--primary);
+    }
+    /* email large special */
+    .email-big {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      background: linear-gradient(145deg, #1f2a3f, #0f172a);
+      padding: 1rem 2.5rem;
+      border-radius: 60px;
+      border: 1px solid var(--primary);
+      box-shadow: 0 0 25px rgba(95, 108, 255, 0.3);
+      font-size: 1.3rem;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .email-big:hover {
+      background: #1e2b47;
+      box-shadow: 0 0 40px var(--primary);
+      transform: scale(1.02);
+    }
+    .email-big i { font-style: normal; font-size: 1.8rem; margin-right: 0.5rem; }
+    /* headings */
+    h1, h2, h3 {
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    h2 {
+      font-size: 2.8rem;
+      background: linear-gradient(to right, #ffffff, #b3c7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+    h2::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent-cyan));
+      border-radius: 4px;
+      margin-top: 0.5rem;
+    }
+    /* hero typing */
+    .typed-container {
+      font-size: 1.5rem;
+      margin: 1rem 0 1.5rem;
+      min-height: 3.5rem;
+    }
+    #typed-text {
+      color: var(--accent-cyan);
+      font-weight: 600;
+      border-right: 3px solid var(--primary);
+      padding-right: 8px;
+      animation: blinkCursor 1s infinite step-end;
+    }
+    @keyframes blinkCursor {
+      0%,100% { border-color: var(--primary); }
+      50% { border-color: transparent; }
+    }
+    /* profile placeholder */
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary);
+      box-shadow: 0 0 40px rgba(95, 108, 255, 0.6);
+      background: #1e2a3a;
+    }
+    /* skills & project cards */
+    .skills-grid, .projects-grid, .devops-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    .skill-card, .project-card, .devops-card {
+      background: var(--bg-card);
+      padding: 1.8rem 1.5rem;
+      border-radius: 28px;
+      border: 1px solid rgba(90, 108, 255, 0.2);
+      backdrop-filter: blur(4px);
+      transition: all 0.3s;
+      box-shadow: 0 10px 20px -10px rgba(0,0,0,0.8);
+    }
+    .skill-card:hover, .project-card:hover, .devops-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--primary);
+      transform: translateY(-8px);
+      box-shadow: 0 25px 30px -10px rgba(95, 108, 255, 0.2);
+    }
+    .skill-card h3, .project-card h3 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.6rem;
+    }
+    .skill-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 0.9rem;
+    }
+    .skill-tag {
+      background: rgba(95, 108, 255, 0.1);
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      border: 1px solid rgba(95,108,255,0.3);
+      color: #cddcff;
+    }
+    .project-desc {
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+      font-size: 0.98rem;
+    }
+    .project-badge {
+      font-size: 0.75rem;
+      background: var(--primary);
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      display: inline-block;
+      opacity: 0.8;
+    }
+    /* footer */
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      color: var(--text-dim);
+      border-top: 1px solid rgba(95,108,255,0.1);
+    }
+    /* navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 12, 18, 0.85);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(95,108,255,0.2);
+    }
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      padding: 1rem 0;
+      font-weight: 500;
+    }
+    .nav-links a {
+      position: relative;
+      padding: 0.3rem 0;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.2s;
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    /* contact section specific */
+    .contact-flex {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+    .social-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.2rem;
+      margin: 2rem 0 1rem;
+    }
+    /* avatar */
+    .hero-flex {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    /* responsiveness */
+    @media (max-width: 700px) {
+      h2 { font-size: 2.2rem; }
+      .hero-flex { justify-content: center; text-align: center; }
+      .nav-links { gap: 1rem; font-size: 0.9rem; flex-wrap: wrap; }
+      .email-big { font-size: 1rem; padding: 0.8rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-links">
+      <a href="#hero">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#devops">DevOps</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO section -->
+    <section id="hero" style="padding-top: 6rem;">
+      <div class="container hero-flex reveal">
+        <div style="flex:1">
+          <span style="font-size: 1.2rem; color: var(--primary);">👋 Hello, I'm</span>
+          <h1 style="font-size: 4rem; line-height: 1.1; margin: 0.5rem 0;">Hamza Shahid</h1>
+          <div class="typed-container">
+            <span id="typed-text"></span>
+          </div>
+          <p style="color: var(--text-dim); max-width: 500px; margin-bottom: 2rem;">
+            <span>📍 Faisalabad, Pakistan</span> <br>
+            Architecting intelligent web systems · AI SaaS · Full stack with edge
+          </p>
+          <div class="social-row" style="justify-content: flex-start;">
+            <a href="https://github.com/hamzashahid10063" target="_blank" class="btn"><span>⚡</span> GitHub</a>
+            <a href="https://www.linkedin.com/in/hamza-shahid-m10063" target="_blank" class="btn"><span>🔗</span> LinkedIn</a>
+            <a href="https://hamzashahid.vercel.app" target="_blank" class="btn"><span>🚀</span> Portfolio</a>
+            <a href="mailto:hamzashahid10063@gmail.com" class="btn btn-outline-light"><span>📧</span> Mail</a>
+          </div>
+        </div>
+        <div>
+          <!-- profile picture placeholder -->
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%232d3748' stroke='%235f6cff' stroke-width='3'/%3E%3Ctext x='50' y='67' font-size='16' text-anchor='middle' fill='%23aabbee' font-family='monospace'%3EPROFILE%3C/text%3E%3Ctext x='50' y='82' font-size='10' text-anchor='middle' fill='%23ccddf9'%3E(placeholder)%3C/text%3E%3C/svg%3E"
+               alt="Hamza Shahid profile" class="profile-pic">
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT (minimal) -->
+    <section id="about">
+      <div class="container reveal">
+        <h2>About</h2>
+        <p style="font-size: 1.4rem; max-width: 900px; color: #d0daff;">
+          I'm a Full Stack AI Engineer specialized in building production-ready AI systems and intelligent web platforms. 
+          I bridge the gap between LLMs, modern frontend, and scalable backend — delivering futuristic user experiences.
+        </p>
+        <div style="margin-top: 2rem; display: flex; gap: 2rem; flex-wrap: wrap;">
+          <span>⚡ AI SaaS · RAG · NLP</span>
+          <span>🧩 MERN · Next.js · WebSockets</span>
+          <span>☁️ Docker · CI/CD · Cloud</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS section (FRONTEND, BACKEND, AI, DATABASES) -->
+    <section id="skills">
+      <div class="container">
+        <h2 class="reveal">Technical expertise</h2>
+        <div class="skills-grid">
+          <!-- frontend -->
+          <div class="skill-card reveal">
+            <h3>🎨 Frontend</h3>
+            <div class="skill-items">
+              <span class="skill-tag">React.js</span><span class="skill-tag">Next.js</span><span class="skill-tag">HTML5</span>
+              <span class="skill-tag">CSS3</span><span class="skill-tag">Tailwind</span><span class="skill-tag">Bootstrap</span>
+            </div>
+          </div>
+          <!-- backend -->
+          <div class="skill-card reveal">
+            <h3>⚙️ Backend</h3>
+            <div class="skill-items">
+              <span class="skill-tag">Node.js</span><span class="skill-tag">Express.js</span><span class="skill-tag">REST API</span>
+              <span class="skill-tag">JWT</span><span class="skill-tag">WebSockets</span><span class="skill-tag">MVC</span>
+            </div>
+          </div>
+          <!-- AI & LLM -->
+          <div class="skill-card reveal">
+            <h3>🤖 Artificial Intelligence</h3>
+            <div class="skill-items">
+              <span class="skill-tag">LLM Integration</span><span class="skill-tag">Prompt Eng.</span><span class="skill-tag">RAG</span>
+              <span class="skill-tag">NLP</span><span class="skill-tag">AI Automation</span><span class="skill-tag">AI SaaS</span>
+            </div>
+          </div>
+          <!-- Databases -->
+          <div class="skill-card reveal">
+            <h3>🗄️ Databases</h3>
+            <div class="skill-items">
+              <span class="skill-tag">MongoDB</span><span class="skill-tag">MySQL</span><span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">Firebase</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS (6 detailed, no external links) -->
+    <section id="projects">
+      <div class="container">
+        <h2 class="reveal">Intelligent projects</h2>
+        <div class="projects-grid">
+          <div class="project-card reveal">
+            <h3>AI SaaS Chat</h3>
+            <div class="project-desc">Production-ready AI chatbot with authentication, conversation history – React, Node.js, MongoDB, LLM API.</div>
+            <span class="project-badge">React · Node · LLM</span>
+          </div>
+          <div class="project-card reveal">
+            <h3>AI Resume Analyzer</h3>
+            <div class="project-desc">NLP-based ATS scoring & resume evaluation system – Python, React.</div>
+            <span class="project-badge">NLP · React · Python</span>
+          </div>
+          <div class="project-card reveal">
+            <h3>MERN E‑Commerce</h3>
+            <div class="project-desc">Full-featured e‑commerce with admin dashboard & payment integration.</div>
+            <span class="project-badge">MongoDB · Express · React · Node</span>
+          </div>
+          <div class="project-card reveal">
+            <h3>AI Content Generator</h3>
+            <div class="project-desc">Blogs, product descriptions & captions with subscription logic – Next.js, AI APIs.</div>
+            <span class="project-badge">Next.js · AI · Subscriptions</span>
+          </div>
+          <div class="project-card reveal">
+            <h3>Real‑Time Notification</h3>
+            <div class="project-desc">WebSocket‑based live updates system for dashboards.</div>
+            <span class="project-badge">WebSockets · Node · React</span>
+          </div>
+          <div class="project-card reveal">
+            <h3>Secure Auth System</h3>
+            <div class="project-desc">JWT authentication with RBAC, protected routes, and session management.</div>
+            <span class="project-badge">JWT · RBAC · security</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEVOPS (and additional tools) -->
+    <section id="devops">
+      <div class="container">
+        <h2 class="reveal">DevOps & infrastructure</h2>
+        <div class="devops-grid">
+          <div class="devops-card reveal">
+            <h3>🧰 Tools & cloud</h3>
+            <div class="skill-items">
+              <span class="skill-tag">Git</span><span class="skill-tag">GitHub Actions</span><span class="skill-tag">CI/CD</span>
+              <span class="skill-tag">Docker</span><span class="skill-tag">Linux</span><span class="skill-tag">Nginx</span>
+              <span class="skill-tag">Vercel</span><span class="skill-tag">Netlify</span><span class="skill-tag">Render</span>
+              <span class="skill-tag">AWS (fund.)</span><span class="skill-tag">API Security</span><span class="skill-tag">Perf. opt.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT (large email, socials, no form) -->
+    <section id="contact">
+      <div class="container contact-flex reveal">
+        <h2 style="text-align: center; display: block; width: 100%;">Let’s connect</h2>
+        <a href="mailto:hamzashahid10063@gmail.com" class="email-big">
+          <span style="font-size: 2rem;">📧</span> hamzashahid10063@gmail.com
+        </a>
+        <div class="social-row">
+          <a href="https://github.com/hamzashahid10063" target="_blank" class="btn" style="padding: 0.8rem 2rem;">GitHub</a>
+          <a href="https://www.linkedin.com/in/hamza-shahid-m10063" target="_blank" class="btn" style="padding: 0.8rem 2rem;">LinkedIn</a>
+          <a href="https://hamzashahid.vercel.app" target="_blank" class="btn" style="padding: 0.8rem 2rem;">Portfolio</a>
+        </div>
+        <p style="color: var(--text-dim);">📍 Faisalabad, Pakistan — remote friendly</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 Hamza Shahid | Full Stack AI Engineer
+    </div>
+  </footer>
+
+  <!-- minimal JavaScript: typing animation + scroll reveal -->
+  <script>
+    (function() {
+      // typing animation
+      const typedSpan = document.getElementById('typed-text');
+      if (typedSpan) {
+        const titles = [
+          'Full Stack AI Engineer',
+          'Intelligent Web Systems',
+          'LLM & RAG Architect',
+          'AI SaaS Developer'
+        ];
+        let i = 0, j = 0, isDeleting = false;
+        function typeEffect() {
+          const current = titles[i];
+          if (!isDeleting && j <= current.length) {
+            typedSpan.textContent = current.substring(0, j++);
+          } else if (isDeleting && j >= 0) {
+            typedSpan.textContent = current.substring(0, j--);
+          }
+          if (!isDeleting && j === current.length + 1) {
+            isDeleting = true;
+            setTimeout(typeEffect, 2000);
+            return;
+          }
+          if (isDeleting && j === 0) {
+            isDeleting = false;
+            i = (i + 1) % titles.length;
+          }
+          setTimeout(typeEffect, isDeleting ? 80 : 120);
+        }
+        typeEffect();
+      }
+
+      // Intersection Observer for smooth reveal
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          } else {
+            // optional: remove to replay? we keep visible once active (but can remove class if you want repeat)
+            // entry.target.classList.remove('active'); // (commented for subtlety, it stays visible)
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+      reveals.forEach(r => observer.observe(r));
+
+      // manually trigger first hero because it's visible, sometimes observer misses due to sticky nav? force activate
+      setTimeout(() => {
+        document.querySelector('#hero .reveal')?.classList.add('active');
+      }, 200);
+    })();
+  </script>
+  <!-- fallback for older browsers: at least make all visible -->
+  <noscript>
+    <style>.reveal { opacity: 1; transform: none; }</style>
+  </noscript>
+</body>
+</html>
